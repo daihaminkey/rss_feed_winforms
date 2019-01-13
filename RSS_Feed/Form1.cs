@@ -10,47 +10,82 @@ using System.Windows.Forms;
 using System.Xml;
 using System.ServiceModel;
 using System.ServiceModel.Syndication;
+using System.Windows.Forms.VisualStyles;
 
 namespace RSS_Feed
 {
     public partial class Form1 : Form
     {
+        
         public Form1()
         {
             InitializeComponent();
-            
+            buttonReload.Visible = false;
         }
-        private void Form1_Load(object sender, EventArgs e)
+
+        List<RSSItemDTO> loadRSS(string[] urls)
         {
-            MouseEventHandler rightClickHandler = new MouseEventHandler(this.RightClickHandler);
-
-            XmlReaderSettings settings = new XmlReaderSettings() {DtdProcessing = DtdProcessing.Parse };
-
-            string[] urls = new string[]
-                {"https://habr.com/rss/interesting/", "https://feeds.podcastmirror.com/zavtracast"};
-
+            Console.WriteLine("In task start");
+            XmlReaderSettings settings = new XmlReaderSettings() { DtdProcessing = DtdProcessing.Parse };
             List<RSSItemDTO> itemsDTO = new List<RSSItemDTO>();
 
             foreach (var url in urls)
             {
-                XmlReader reader = XmlReader.Create(url, settings);
-                SyndicationFeed feed = SyndicationFeed.Load(reader);
-                reader.Close();
-
-                itemsDTO.AddRange(RSSItemDTO.GetItems(feed));
-
+                try
+                {
+                    using (var reader = XmlReader.Create(url, settings))
+                    {
+                        SyndicationFeed feed = SyndicationFeed.Load(reader);
+                        itemsDTO.AddRange(RSSItemDTO.GetItems(feed));
+                    }
+                }
+                catch (Exception e)
+                {
+                    MessageBox.Show($"При чтении ленты {url} произошла ошибка: {e.Message}", "Ошибка");
+                }
+                
             }
+            Console.WriteLine("In task finish");
+            return itemsDTO;
+        }
 
-            int y = 0;
-            foreach (RSSItemDTO item in itemsDTO.OrderByDescending(i => i.pubDate))
+        void LoadData()
+        {
+            pictureBox1.Visible = true;
+            panelList.Controls.Clear();
+            
+            MouseEventHandler rightClickHandler = new MouseEventHandler(this.RightClickHandler);
+
+            string[] urls = new string[]
+                {"https://habr.com/rss/interesting7/", "https://feeds.podcastmirror.com/zavtracast7"};
+
+            var itemsDTOTask = Task.Run(() => loadRSS(urls));
+
+            var itemsDTO = itemsDTOTask.Result;
+            pictureBox1.Visible = false;
+
+
+            if (itemsDTO?.Count > 0)
             {
-                Console.WriteLine(item.feedName+": "+item.title);
-                RSSItemPanel itemPanel = new RSSItemPanel(item, rightClickHandler);
-                itemPanel.Location = new Point(0, y * (itemPanel.Height + 2));
-                panelList.Controls.Add(itemPanel);
-                y++;
+                buttonReload.Visible = false;
+                int y = 0;
+                foreach (RSSItemDTO item in itemsDTO.OrderByDescending(i => i.pubDate))
+                {
+                    RSSItemPanel itemPanel = new RSSItemPanel(item, rightClickHandler);
+                    itemPanel.Location = new Point(0, y * (itemPanel.Height + 2));
+                    panelList.Controls.Add(itemPanel);
+                    y++;
+                }
             }
+            else
+            {
+                buttonReload.Visible = true;
+            }
+        }
 
+        private void Form1_Load(object sender, EventArgs e)
+        {
+            LoadData();
         }
 
         RSSItemPanel lastClickedPanel = null;
@@ -75,6 +110,11 @@ namespace RSS_Feed
         private void markdownToolStripMenuItem_Click(object sender, EventArgs e)
         {
             rssItemDescriptionPanel1.renderHTML = !rssItemDescriptionPanel1.renderHTML;
+        }
+
+        private void button1_Click(object sender, EventArgs e)
+        {
+            LoadData();
         }
     }
 }

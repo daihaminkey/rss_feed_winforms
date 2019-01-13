@@ -63,7 +63,6 @@ namespace RSS_Feed
 
         private void webBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
         {
-            Console.WriteLine("Навигация пошла");
             if (firstLinkHandled)
             {
                 System.Diagnostics.Process.Start(e.Url.ToString());
