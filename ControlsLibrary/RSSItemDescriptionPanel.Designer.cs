@@ -30,9 +30,9 @@
         {
             this.components = new System.ComponentModel.Container();
             this.webBrowser1 = new System.Windows.Forms.WebBrowser();
-            this.rssItemPanel1 = new RSS_Feed.RSSItemPanel();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.отобразитьТегиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
+            this.rssItemPanel1 = new RSS_Feed.RSSItemPanel();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -44,29 +44,32 @@
             this.webBrowser1.Name = "webBrowser1";
             this.webBrowser1.Size = new System.Drawing.Size(398, 324);
             this.webBrowser1.TabIndex = 1;
-            // 
-            // rssItemPanel1
-            // 
-            this.rssItemPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.rssItemPanel1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.rssItemPanel1.Enabled = false;
-            this.rssItemPanel1.Location = new System.Drawing.Point(3, 3);
-            this.rssItemPanel1.Name = "rssItemPanel1";
-            this.rssItemPanel1.Size = new System.Drawing.Size(398, 59);
-            this.rssItemPanel1.TabIndex = 3;
+            this.webBrowser1.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.webBrowser1_Navigating);
             // 
             // contextMenuStrip1
             // 
             this.contextMenuStrip1.Items.AddRange(new System.Windows.Forms.ToolStripItem[] {
             this.отобразитьТегиToolStripMenuItem});
             this.contextMenuStrip1.Name = "contextMenuStrip1";
-            this.contextMenuStrip1.Size = new System.Drawing.Size(181, 48);
+            this.contextMenuStrip1.Size = new System.Drawing.Size(165, 26);
             // 
             // отобразитьТегиToolStripMenuItem
             // 
             this.отобразитьТегиToolStripMenuItem.Name = "отобразитьТегиToolStripMenuItem";
-            this.отобразитьТегиToolStripMenuItem.Size = new System.Drawing.Size(180, 22);
+            this.отобразитьТегиToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.отобразитьТегиToolStripMenuItem.Text = "Отобразить теги";
+            // 
+            // rssItemPanel1
+            // 
+            this.rssItemPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.rssItemPanel1.Colored = false;
+            this.rssItemPanel1.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.rssItemPanel1.Enabled = false;
+            this.rssItemPanel1.HideContent = false;
+            this.rssItemPanel1.Location = new System.Drawing.Point(3, 3);
+            this.rssItemPanel1.Name = "rssItemPanel1";
+            this.rssItemPanel1.Size = new System.Drawing.Size(398, 59);
+            this.rssItemPanel1.TabIndex = 3;
             // 
             // RSSItemDescriptionPanel
             // 

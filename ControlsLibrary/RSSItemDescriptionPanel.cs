@@ -47,19 +47,17 @@ namespace RSS_Feed
         {
             if(rssItemPanel1.item != null)
                 webBrowser1.DocumentText = renderHTML
-                    ? convertToHTML(rssItemPanel1.item.Summary.Text)
-                    : convertToPlainText(rssItemPanel1.item.Summary.Text);
+                    ? convertToHTML(rssItemPanel1.item.summary)
+                    : convertToPlainText(rssItemPanel1.item.summary);
         }
 
         public void SetContent(RSSItemPanel panel)
         {
-            this.rssItemPanel1.CopyData(panel);
+            this.rssItemPanel1.SetData(panel.item);
             firstLinkHandled = false;
             if (rssItemPanel1.HideContent)
                 rssItemPanel1.HideContent = false;
             FillContent();
-
-
 
         }
 

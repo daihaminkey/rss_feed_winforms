@@ -22,34 +22,53 @@ namespace RSS_Feed
         }
         private void Form1_Load(object sender, EventArgs e)
         {
-            XmlReaderSettings settings = new XmlReaderSettings() {DtdProcessing = DtdProcessing.Parse };
-            
-
-            string url = "https://habr.com/rss/interesting/";
-            XmlReader reader = XmlReader.Create(url, settings);
-            SyndicationFeed feed = SyndicationFeed.Load(reader);
-            reader.Close();
             MouseEventHandler rightClickHandler = new MouseEventHandler(this.RightClickHandler);
 
-            int y = 0;
-            foreach (SyndicationItem item in feed.Items)
+            XmlReaderSettings settings = new XmlReaderSettings() {DtdProcessing = DtdProcessing.Parse };
+
+            string[] urls = new string[]
+                {"https://habr.com/rss/interesting/", "https://feeds.podcastmirror.com/zavtracast"};
+
+            List<RSSItemDTO> itemsDTO = new List<RSSItemDTO>();
+
+            foreach (var url in urls)
             {
-                RSSItemPanel itemPanel = new RSSItemPanel(item, feed.Title.Text, rightClickHandler);
-                itemPanel.Location = new Point(0, y*(itemPanel.Height+2));
+                XmlReader reader = XmlReader.Create(url, settings);
+                SyndicationFeed feed = SyndicationFeed.Load(reader);
+                reader.Close();
+
+                itemsDTO.AddRange(RSSItemDTO.GetItems(feed));
+
+            }
+
+            int y = 0;
+            foreach (RSSItemDTO item in itemsDTO.OrderByDescending(i => i.pubDate))
+            {
+                Console.WriteLine(item.feedName+": "+item.title);
+                RSSItemPanel itemPanel = new RSSItemPanel(item, rightClickHandler);
+                itemPanel.Location = new Point(0, y * (itemPanel.Height + 2));
                 panelList.Controls.Add(itemPanel);
                 y++;
             }
-            
-
-            
 
         }
 
+        RSSItemPanel lastClickedPanel = null;
+
+
         private void RightClickHandler(object sender, MouseEventArgs e)
         {
-            if(e.Button == MouseButtons.Right)
+            RSSItemPanel clickedPanel = sender as RSSItemPanel;
+
+            if(!clickedPanel.Equals(lastClickedPanel) && e.Button == MouseButtons.Right)
             {
-                rssItemDescriptionPanel1.SetContent(sender as RSSItemPanel);
+                
+                rssItemDescriptionPanel1.SetContent(clickedPanel);
+
+                clickedPanel.Colored = true;
+                if (lastClickedPanel != null)
+                    lastClickedPanel.Colored = false;
+                lastClickedPanel = clickedPanel;
             }
         }
 

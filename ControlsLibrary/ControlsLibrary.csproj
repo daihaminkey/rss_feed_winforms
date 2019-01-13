@@ -49,6 +49,7 @@
     <Compile Include="RSSItemDescriptionPanel.Designer.cs">
       <DependentUpon>RSSItemDescriptionPanel.cs</DependentUpon>
     </Compile>
+    <Compile Include="RSSItemDTO.cs" />
     <Compile Include="RSSItemPanel.cs">
       <SubType>UserControl</SubType>
     </Compile>
