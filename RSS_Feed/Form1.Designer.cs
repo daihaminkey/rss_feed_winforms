@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.panelList = new System.Windows.Forms.Panel();
             this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.rssItemDescriptionPanel1 = new RSS_Feed.RSSItemDescriptionPanel();
@@ -39,6 +40,7 @@
             this.ViewToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.markdownToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
             this.buttonReload = new System.Windows.Forms.Button();
+            this.timerReload = new System.Windows.Forms.Timer(this.components);
             this.panelList.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.menuStrip1.SuspendLayout();
@@ -55,7 +57,7 @@
             // 
             // pictureBox1
             // 
-            this.pictureBox1.Image = global::RSS_Feed.Properties.Resources.Gear_8_7s_94px;
+            this.pictureBox1.Image = global::RSS_Feed.Properties.Resources.Gear_81;
             this.pictureBox1.Location = new System.Drawing.Point(168, 124);
             this.pictureBox1.Name = "pictureBox1";
             this.pictureBox1.Size = new System.Drawing.Size(85, 85);
@@ -134,7 +136,13 @@
             this.buttonReload.TabIndex = 3;
             this.buttonReload.Text = "Обновить";
             this.buttonReload.UseVisualStyleBackColor = true;
-            this.buttonReload.Click += new System.EventHandler(this.button1_Click);
+            this.buttonReload.Click += new System.EventHandler(this.buttonReload_Click);
+            // 
+            // timerReload
+            // 
+            this.timerReload.Enabled = true;
+            this.timerReload.Interval = 5000;
+            this.timerReload.Tick += new System.EventHandler(this.timerReload_Tick);
             // 
             // Form1
             // 
@@ -173,6 +181,7 @@
         private System.Windows.Forms.ToolStripMenuItem markdownToolStripMenuItem;
         private System.Windows.Forms.PictureBox pictureBox1;
         private System.Windows.Forms.Button buttonReload;
+        private System.Windows.Forms.Timer timerReload;
     }
 }
 

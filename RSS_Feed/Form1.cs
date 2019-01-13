@@ -10,22 +10,25 @@ using System.Windows.Forms;
 using System.Xml;
 using System.ServiceModel;
 using System.ServiceModel.Syndication;
+using System.Timers;
 using System.Windows.Forms.VisualStyles;
 
 namespace RSS_Feed
 {
     public partial class Form1 : Form
     {
-        
+
         public Form1()
         {
             InitializeComponent();
             buttonReload.Visible = false;
+
         }
+
+
 
         List<RSSItemDTO> loadRSS(string[] urls)
         {
-            Console.WriteLine("In task start");
             XmlReaderSettings settings = new XmlReaderSettings() { DtdProcessing = DtdProcessing.Parse };
             List<RSSItemDTO> itemsDTO = new List<RSSItemDTO>();
 
@@ -45,12 +48,12 @@ namespace RSS_Feed
                 }
                 
             }
-            Console.WriteLine("In task finish");
             return itemsDTO;
         }
 
         void LoadData()
         {
+            Console.WriteLine("Обновляем содержимое...");
             pictureBox1.Visible = true;
             panelList.Controls.Clear();
             
@@ -112,7 +115,13 @@ namespace RSS_Feed
             rssItemDescriptionPanel1.renderHTML = !rssItemDescriptionPanel1.renderHTML;
         }
 
-        private void button1_Click(object sender, EventArgs e)
+
+        private void timerReload_Tick(object sender, EventArgs e)
+        {
+            LoadData();
+        }
+
+        private void buttonReload_Click(object sender, EventArgs e)
         {
             LoadData();
         }
