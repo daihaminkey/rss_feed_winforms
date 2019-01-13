@@ -15,6 +15,7 @@ namespace RSS_Feed
     public partial class RSSItemDescriptionPanel : UserControl
     {
         private bool _renderHTML = true;
+        private bool firstLinkHandled = false;
         
         public bool renderHTML
         {
@@ -28,6 +29,8 @@ namespace RSS_Feed
         public RSSItemDescriptionPanel()
         {
             InitializeComponent();
+            rssItemPanel1.colorable = false;
+            rssItemPanel1.HideContent = true;
         }
 
         string convertToHTML(string text)
@@ -51,11 +54,25 @@ namespace RSS_Feed
         public void SetContent(RSSItemPanel panel)
         {
             this.rssItemPanel1.CopyData(panel);
+            firstLinkHandled = false;
+            if (rssItemPanel1.HideContent)
+                rssItemPanel1.HideContent = false;
             FillContent();
 
 
 
         }
 
+        private void webBrowser1_Navigating(object sender, WebBrowserNavigatingEventArgs e)
+        {
+            Console.WriteLine("Навигация пошла");
+            if (firstLinkHandled)
+            {
+                System.Diagnostics.Process.Start(e.Url.ToString());
+                e.Cancel = true; 
+            }
+            else
+                firstLinkHandled = true;
+        }
     }
 }
