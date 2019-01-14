@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Text.RegularExpressions;
 using System.Xml.Serialization;
 
@@ -93,7 +94,9 @@ namespace RSS_Feed
             {
                 try
                 {
-                    return (Config) xml.Deserialize(fs);
+                    Config ret = (Config) xml.Deserialize(fs);
+                    ret.Feeds = ret.Feeds.Distinct().ToList();
+                    return ret;
                 }
                 catch
                 {
