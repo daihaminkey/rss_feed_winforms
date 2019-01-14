@@ -1,89 +1,119 @@
-﻿using System;
-using System.Collections.Generic;
-using System.ComponentModel;
+﻿using System.Diagnostics;
 using System.Drawing;
-using System.Data;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 using System.Windows.Forms;
-using System.ServiceModel.Syndication;
 
-namespace RSS_Feed
+namespace ControlsLibrary
 {
+    /// <summary>
+    /// Панель, отображающая RSS-элемент
+    /// </summary>
     public partial class RSSItemPanel : UserControl
     {
+        /// <summary>
+        ///     Скрыта ли панель
+        /// </summary>
+        private bool _hidden;
 
-        private bool _hidden = false;
-        private bool _colored = false;
-        public bool colorable = true;
+        /// <summary>
+        ///     Подсвечена ли панель
+        /// </summary>
+        private bool _highlighted;
 
-        public MouseEventHandler rightClickHandler = new MouseEventHandler(EmptyMouseHandler);
-        public RSSItemDTO item { get; private set; }
+        /// <summary>
+        ///     Может ли панель быть подсвечена
+        /// </summary>
+        public bool Highlightable = true;
 
+        /// <summary>
+        ///     Обработчик правого клика по всем элементам панели (задается извне)
+        /// </summary>
+        public MouseEventHandler RightClickHandler = EmptyMouseHandler;
+
+        /// <summary>
+        ///     Конструктор панели-заглушки
+        /// </summary>
+        public RSSItemPanel()
+        {
+            InitializeComponent();
+        }
+
+        /// <summary>
+        ///     Конструктор панели, содержащей данные
+        /// </summary>
+        /// <param name="item">Данные RSS-элемента</param>
+        /// <param name="rightClickHandler">Обработчик правого клика</param>
+        public RSSItemPanel(RSSItemDTO item, MouseEventHandler rightClickHandler)
+        {
+            InitializeComponent();
+
+            SetData(item);
+            RightClickHandler = rightClickHandler;
+        }
+
+        /// <summary>
+        ///     Данные, отображаемые панелью
+        /// </summary>
+        public RSSItemDTO Item { get; private set; }
+
+        /// <summary>
+        ///     <para>get - возвращает, скрыто ли содержание панели</para>
+        ///     <para>set - скрывает все элементы панели</para>
+        /// </summary>
         public bool HideContent
         {
             get => _hidden;
             set
             {
                 _hidden = value;
-                this.labelChannel.Visible = this.labelDate.Visible = this.labelTitle.Visible = !value;
-                this.Enabled = !value;
+                labelChannel.Visible = labelDate.Visible = labelTitle.Visible = !value;
+                Enabled = !value;
             }
         }
 
-        public bool Colored
+        /// <summary>
+        ///     <para>get - возвращает, раскрашена ли панель</para>
+        ///     <para>set - включает/выключает выделение панели цветом</para>
+        /// </summary>
+        public bool Highlighted
         {
-            get => _colored;
+            get => _highlighted;
             set
             {
-                if (colorable)
+                if (Highlightable)
                 {
-                    _colored = value;
-                    this.BackColor = _colored ? Color.LightSteelBlue : Control.DefaultBackColor;
+                    _highlighted = value;
+                    BackColor = _highlighted ? Color.LightSteelBlue : DefaultBackColor;
                 }
             }
         }
 
-        public RSSItemPanel()
-        {
-            InitializeComponent();
-        }
-
-        public RSSItemPanel(RSSItemDTO item, MouseEventHandler rightClickHandler)
-        {
-            InitializeComponent();
-            
-            this.SetData(item);
-            this.rightClickHandler = rightClickHandler;
-        }
-
-        
-
+        /// <summary>
+        ///     Задает данные для отображения
+        /// </summary>
+        /// <param name="item">Данные</param>
         public void SetData(RSSItemDTO item)
         {
-            this.item = item;
-            this.labelChannel.Text = item.feedName;
-            this.labelTitle.Text = item.title;
-            this.labelDate.Text = item.pubDate.ToString("dd.MM.yy\nHH:mm");
+            Item = item;
+            labelChannel.Text = item.FeedName;
+            labelTitle.Text = item.Title;
+            labelDate.Text = item.PubDate.ToString("dd.MM.yy\nHH:mm");
         }
 
-
+        /// <summary>
+        ///     Обработчик клика
+        /// </summary>
         private void RSSPanel_MouseClick(object sender, MouseEventArgs e)
         {
             if (e.Button == MouseButtons.Left)
-            {
-                System.Diagnostics.Process.Start(item.link);
-            }
-            else if(e.Button == MouseButtons.Right)
-            {
-                rightClickHandler(this, e);
-            }
+                Process.Start(Item.Link);
+            else if (e.Button == MouseButtons.Right) RightClickHandler(this, e);
         }
 
+        /// <summary>
+        ///     Пустой обработчик, необходимый для корректной компиляции
+        /// </summary>
         private static void EmptyMouseHandler(object sender, MouseEventArgs e)
         {
-
         }
     }
 }

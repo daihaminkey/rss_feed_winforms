@@ -1,4 +1,4 @@
-﻿namespace RSS_Feed
+﻿namespace ControlsLibrary
 {
     partial class RSSItemPanel
     {
@@ -30,9 +30,9 @@
         {
             this.labelDate = new System.Windows.Forms.Label();
             this.labelChannel = new System.Windows.Forms.Label();
-            this.panel1 = new System.Windows.Forms.Panel();
+            this.panelWrapper = new System.Windows.Forms.Panel();
             this.labelTitle = new System.Windows.Forms.Label();
-            this.panel1.SuspendLayout();
+            this.panelWrapper.SuspendLayout();
             this.SuspendLayout();
             // 
             // labelDate
@@ -57,14 +57,14 @@
             this.labelChannel.Text = "Habr";
             this.labelChannel.MouseClick += new System.Windows.Forms.MouseEventHandler(this.RSSPanel_MouseClick);
             // 
-            // panel1
+            // panelWrapper
             // 
-            this.panel1.Controls.Add(this.labelTitle);
-            this.panel1.Location = new System.Drawing.Point(6, 13);
-            this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(392, 30);
-            this.panel1.TabIndex = 4;
-            this.panel1.MouseClick += new System.Windows.Forms.MouseEventHandler(this.RSSPanel_MouseClick);
+            this.panelWrapper.Controls.Add(this.labelTitle);
+            this.panelWrapper.Location = new System.Drawing.Point(6, 13);
+            this.panelWrapper.Name = "panelWrapper";
+            this.panelWrapper.Size = new System.Drawing.Size(392, 30);
+            this.panelWrapper.TabIndex = 4;
+            this.panelWrapper.MouseClick += new System.Windows.Forms.MouseEventHandler(this.RSSPanel_MouseClick);
             // 
             // labelTitle
             // 
@@ -83,12 +83,12 @@
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
             this.Controls.Add(this.labelChannel);
             this.Controls.Add(this.labelDate);
-            this.Controls.Add(this.panel1);
+            this.Controls.Add(this.panelWrapper);
             this.Cursor = System.Windows.Forms.Cursors.Hand;
             this.Name = "RSSItemPanel";
             this.Size = new System.Drawing.Size(398, 59);
             this.MouseClick += new System.Windows.Forms.MouseEventHandler(this.RSSPanel_MouseClick);
-            this.panel1.ResumeLayout(false);
+            this.panelWrapper.ResumeLayout(false);
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -97,7 +97,7 @@
         #endregion
         private System.Windows.Forms.Label labelDate;
         private System.Windows.Forms.Label labelChannel;
-        private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Panel panelWrapper;
         private System.Windows.Forms.Label labelTitle;
     }
 }

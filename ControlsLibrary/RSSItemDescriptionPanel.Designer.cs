@@ -1,6 +1,8 @@
-﻿namespace RSS_Feed
+﻿using System.Windows.Forms;
+
+namespace ControlsLibrary
 {
-    partial class RSSItemDescriptionPanel
+    partial class RSSItemDescriptionPanel : UserControl
     {
         /// <summary> 
         /// Обязательная переменная конструктора.
@@ -29,22 +31,22 @@
         private void InitializeComponent()
         {
             this.components = new System.ComponentModel.Container();
-            this.webBrowser1 = new System.Windows.Forms.WebBrowser();
+            this.webBrowser = new System.Windows.Forms.WebBrowser();
             this.contextMenuStrip1 = new System.Windows.Forms.ContextMenuStrip(this.components);
             this.отобразитьТегиToolStripMenuItem = new System.Windows.Forms.ToolStripMenuItem();
-            this.rssItemPanel1 = new RSS_Feed.RSSItemPanel();
+            this.rssItemPanel = new ControlsLibrary.RSSItemPanel();
             this.contextMenuStrip1.SuspendLayout();
             this.SuspendLayout();
             // 
-            // webBrowser1
+            // webBrowser
             // 
-            this.webBrowser1.ContextMenuStrip = this.contextMenuStrip1;
-            this.webBrowser1.Location = new System.Drawing.Point(3, 68);
-            this.webBrowser1.MinimumSize = new System.Drawing.Size(20, 20);
-            this.webBrowser1.Name = "webBrowser1";
-            this.webBrowser1.Size = new System.Drawing.Size(398, 324);
-            this.webBrowser1.TabIndex = 1;
-            this.webBrowser1.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.webBrowser1_Navigating);
+            this.webBrowser.ContextMenuStrip = this.contextMenuStrip1;
+            this.webBrowser.Location = new System.Drawing.Point(3, 68);
+            this.webBrowser.MinimumSize = new System.Drawing.Size(20, 20);
+            this.webBrowser.Name = "webBrowser";
+            this.webBrowser.Size = new System.Drawing.Size(398, 324);
+            this.webBrowser.TabIndex = 1;
+            this.webBrowser.Navigating += new System.Windows.Forms.WebBrowserNavigatingEventHandler(this.webBrowser1_Navigating);
             // 
             // contextMenuStrip1
             // 
@@ -59,25 +61,26 @@
             this.отобразитьТегиToolStripMenuItem.Size = new System.Drawing.Size(164, 22);
             this.отобразитьТегиToolStripMenuItem.Text = "Отобразить теги";
             // 
-            // rssItemPanel1
+            // rssItemPanel
             // 
-            this.rssItemPanel1.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.rssItemPanel1.Colored = false;
-            this.rssItemPanel1.Cursor = System.Windows.Forms.Cursors.Hand;
-            this.rssItemPanel1.Enabled = false;
-            this.rssItemPanel1.HideContent = false;
-            this.rssItemPanel1.Location = new System.Drawing.Point(3, 3);
-            this.rssItemPanel1.Name = "rssItemPanel1";
-            this.rssItemPanel1.Size = new System.Drawing.Size(398, 59);
-            this.rssItemPanel1.TabIndex = 3;
+            this.rssItemPanel.BackColor = System.Drawing.SystemColors.Control;
+            this.rssItemPanel.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
+            this.rssItemPanel.Cursor = System.Windows.Forms.Cursors.Hand;
+            this.rssItemPanel.Enabled = false;
+            this.rssItemPanel.HideContent = false;
+            this.rssItemPanel.Highlighted = false;
+            this.rssItemPanel.Location = new System.Drawing.Point(3, 3);
+            this.rssItemPanel.Name = "rssItemPanel";
+            this.rssItemPanel.Size = new System.Drawing.Size(398, 59);
+            this.rssItemPanel.TabIndex = 3;
             // 
             // RSSItemDescriptionPanel
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.Controls.Add(this.rssItemPanel1);
-            this.Controls.Add(this.webBrowser1);
+            this.Controls.Add(this.rssItemPanel);
+            this.Controls.Add(this.webBrowser);
             this.Name = "RSSItemDescriptionPanel";
             this.Size = new System.Drawing.Size(404, 391);
             this.contextMenuStrip1.ResumeLayout(false);
@@ -86,8 +89,8 @@
         }
 
         #endregion
-        private System.Windows.Forms.WebBrowser webBrowser1;
-        private RSSItemPanel rssItemPanel1;
+        private System.Windows.Forms.WebBrowser webBrowser;
+        private RSSItemPanel rssItemPanel;
         private System.Windows.Forms.ContextMenuStrip contextMenuStrip1;
         private System.Windows.Forms.ToolStripMenuItem отобразитьТегиToolStripMenuItem;
     }
