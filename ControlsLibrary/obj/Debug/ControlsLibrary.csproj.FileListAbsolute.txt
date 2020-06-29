@@ -1,0 +1,9 @@
+C:\Users\nik-801\Documents\Работа\Visual Studio\RSS_Feed\ControlsLibrary\bin\Debug\ControlsLibrary.dll
+C:\Users\nik-801\Documents\Работа\Visual Studio\RSS_Feed\ControlsLibrary\bin\Debug\ControlsLibrary.pdb
+C:\Users\nik-801\Documents\Работа\Visual Studio\RSS_Feed\ControlsLibrary\obj\Debug\ControlsLibrary.csprojAssemblyReference.cache
+C:\Users\nik-801\Documents\Работа\Visual Studio\RSS_Feed\ControlsLibrary\obj\Debug\ControlsLibrary.csproj.CoreCompileInputs.cache
+C:\Users\nik-801\Documents\Работа\Visual Studio\RSS_Feed\ControlsLibrary\obj\Debug\ControlsLibrary.dll
+C:\Users\nik-801\Documents\Работа\Visual Studio\RSS_Feed\ControlsLibrary\obj\Debug\ControlsLibrary.pdb
+C:\Users\nik-801\Documents\Работа\Visual Studio\RSS_Feed\ControlsLibrary\obj\Debug\ControlsLibrary.RSSItemDescriptionPanel.resources
+C:\Users\nik-801\Documents\Работа\Visual Studio\RSS_Feed\ControlsLibrary\obj\Debug\ControlsLibrary.RSSItemPanel.resources
+C:\Users\nik-801\Documents\Работа\Visual Studio\RSS_Feed\ControlsLibrary\obj\Debug\ControlsLibrary.csproj.GenerateResource.cache
