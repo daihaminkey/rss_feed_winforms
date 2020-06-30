@@ -1,7 +1,5 @@
 bin/
 obj/
-Properties/
-packages/
 
 .vs/
 *.sln.DotSettings.user

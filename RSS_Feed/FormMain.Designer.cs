@@ -65,7 +65,7 @@
             // 
             // pictureBoxLoading
             // 
-            this.pictureBoxLoading.Image = global::RSS_Feed.Properties.Resources.loading_gif;
+            this.pictureBoxLoading.Image = global::RSS_Feed.Properties.Resources.loading;
             this.pictureBoxLoading.Location = new System.Drawing.Point(170, 175);
             this.pictureBoxLoading.Name = "pictureBoxLoading";
             this.pictureBoxLoading.Size = new System.Drawing.Size(85, 85);
@@ -197,6 +197,7 @@
             // 
             // toolStripTextBoxAddFeed
             // 
+            this.toolStripTextBoxAddFeed.Font = new System.Drawing.Font("Segoe UI", 9F);
             this.toolStripTextBoxAddFeed.Name = "toolStripTextBoxAddFeed";
             this.toolStripTextBoxAddFeed.Size = new System.Drawing.Size(100, 23);
             this.toolStripTextBoxAddFeed.KeyDown += new System.Windows.Forms.KeyEventHandler(this.toolStripTextBoxAddFeed_KeyDown);
